@@ -9,6 +9,7 @@ import {
   View,
 } from "react-native";
 import * as yup from "yup";
+import LoginField from "./LoginField";
 
 const loginValidationSchema = yup.object().shape({
   email: yup
@@ -18,7 +19,7 @@ const loginValidationSchema = yup.object().shape({
   password: yup.string().required("La contraseña es requerida."),
 });
 
-interface loginValues {
+export interface loginValues {
   password: string;
   email: string;
 }
@@ -47,28 +48,24 @@ const Login = () => {
       >
         {({
           handleChange,
-          handleBlur,
           handleSubmit,
           values,
           errors,
           isValid,
         }) => (
           <View>
-            <TextInput
-              onChangeText={handleChange("email")}
-              onBlur={handleBlur("email")}
-              value={values.email}
+            <LoginField
+              handleChange={handleChange("email")}
               placeholder="Correo Electrónico"
+              value={values.email}
+              error={errors.email}
             />
-            {errors.email && <Text>{errors.email}</Text>}
-
-            <TextInput
-              onChangeText={handleChange("password")}
-              onBlur={handleBlur("password")}
-              value={values.password}
+            <LoginField
+              handleChange={handleChange("password")}
               placeholder="Contraseña"
+              value={values.password}
+              error={errors.password}
             />
-            {errors.password && <Text>{errors.password}</Text>}
 
             <Button
               title="Enviar"
