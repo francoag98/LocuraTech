@@ -1,7 +1,21 @@
 import React from "react";
-import { Text, TextInput, View } from "react-native";
+import { StyleSheet, Text, TextInput, View } from "react-native";
 import { loginValues } from "./Login";
 import { FormikErrors } from "formik";
+import theme from "../../theme";
+
+const styles = StyleSheet.create({
+  input: {
+    width: "100%",
+    marginVertical: 8,
+    borderBottomColor: "grey",
+    borderBottomWidth: 2,
+  },
+  error: {
+    color: "red",
+    fontSize: theme.fontSizes.body,
+  },
+});
 
 interface LoginFieldProps {
   placeholder: string;
@@ -15,6 +29,7 @@ interface LoginFieldProps {
       ? void
       : (e: string | React.ChangeEvent<any>) => void;
   };
+  password?: boolean;
 }
 
 const LoginField = ({
@@ -22,15 +37,18 @@ const LoginField = ({
   placeholder,
   error,
   handleChange,
+  password,
 }: LoginFieldProps) => {
   return (
     <View>
       <TextInput
+        style={styles.input}
         onChangeText={handleChange}
         value={value}
         placeholder={placeholder}
+        secureTextEntry={password}
       />
-      {error && <Text>{error}</Text>}
+      {error && <Text style={styles.error}>{error}</Text>}
     </View>
   );
 };
