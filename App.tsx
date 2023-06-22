@@ -5,6 +5,7 @@ import Login from './components/Login/Login';
 export default function App() {
   return (
     <View style={styles.container}>
+      {/* TODO Cambiar por el ruteo */}
       <Login />
     </View>
   );
